@@ -3,5 +3,7 @@ In this project we describe the pipelines and tools required for processing RNAs
 
 ### NGS Pipelines
 [RNAseq Pipeline](Scripts/RNAseq)
+
 [WES Pipeline](Scripts/WES)
+
 [WGS Pipeline](Scripts/WGS)
