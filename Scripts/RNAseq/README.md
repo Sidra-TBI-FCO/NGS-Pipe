@@ -12,30 +12,30 @@ Here we provide the tools to process raw RNAseq paired end read from cancer samp
 - This step is done in the project folder. All fastq.gz files available in FASTQ folder will be QC'ed [FastqQ files quality](/Scripts/RNAseq/02.0%20-%20Quality%20Control%20(QC)/fastqc.HPC.sh), then MultiQC will be run to agregate the results into one HTML report. All individual fastQC output files will be created in a new folder called QC, while the multiQC report will go in the project folder. 
 
 ### 03.0 Trimming
-- [Trimming](/Scripts/RNASeq/0.2%20-%20Trimming/trimming.fastq.HPC.sh) of adapter sequences from short read data in the fastq files avilable in FASTQ folder. This step is done in the main project folder, and the output (trimmed fastq files) will be created in a new folder called TRIMMED/FASTQ. Quality control of the trimmed fastq files can be done following the previous step inside the TRIMMED folder.
+- [Trimming](/Scripts/RNAseq/03.0%20-%20Trimming/trimming.fastq.HPC.sh) of adapter sequences from short read data in the fastq files avilable in FASTQ folder. This step is done in the main project folder, and the output (trimmed fastq files) will be created in a new folder called TRIMMED/FASTQ. Quality control of the trimmed fastq files can be done following the previous step inside the TRIMMED folder.
 
 ### 04.0 Alignment
-- Allign reads to the reference genome GRCH37 or GRCH38 using STAR or Hista2. Currently we are using reference genome GRCH38 and [Hisat2 aligner](/Scripts/RNASeq/0.3%20-%20Alignment/align.fastq.hisat2.sh). This step is done in TRIMMED folder and uses the trimmed fastq files generated from the previous step. The output files from this step will be .bam files and created in TRIMMED/BAM folder. 
+- Allign reads to the reference genome GRCH37 or GRCH38 using STAR or Hista2. Currently we are using reference genome GRCH38 and [Hisat2 aligner](/Scripts/RNAseq/04.0%20-%20Alignment/align.fastq.hisat2.sh). This step is done in TRIMMED folder and uses the trimmed fastq files generated from the previous step. The output files from this step will be .bam files and created in TRIMMED/BAM folder. 
 
 ### 05.0 QC Post Alignment 
-- Post alignment quality control of bam files created from the previous step is aggregated by running MultiQc in the TRIMMED folder. The output from this step will be an HTML multiqc report generated in the TRIMMED folder. 
+- [Post alignment quality control](/Scripts/RNAseq/05.0%20-%20QC%20Post-Alignment/README.md) of bam files created from the previous step is aggregated by running MultiQc in the TRIMMED folder. The output from this step will be an HTML multiqc report generated in the TRIMMED folder. 
 
 ### 06.0 Expression Matrix
-- Generate a raw counts matrix using subreads [featureCounts](/Scripts/RNASeq/0.4%20-%20Feature%20Counts/subreads.create.matrix.trimmed.HPC.sh). This step will uses all .bam files generated from step 4, and will be done in TRIMMED folder. The output file from this step is a gene expression matrix text file that will be created in TRIMMED/COUNT-p (p for paired) folder. Downstream analysis is done using R. 
+- Generate a raw counts matrix using subreads [featureCounts](/Scripts/RNAseq/06.0%20-%20Expression%20Matrix/subreads.create.matrix.trimmed.HPC.sh). This step will uses all .bam files generated from step 4, and will be done in TRIMMED folder. The output file from this step is a gene expression matrix text file that will be created in TRIMMED/COUNT-p (p for paired) folder. Downstream analysis is done using R. 
 
 ### 07.0 Normalization 
-- Data normalization for expression matrix is done by reading raw counts data into R. Normalization can be performed in many ways, DESeq2 Has its own normalization build in, while [EDAseq](/../../r-toolbox/-/blob/master/Raw%20Data%20Processing/Normalization/gene_counts_normalization.R) uses a ["gccontent" file](/../../r-toolbox/-/blob/master/Raw%20Data%20Processing/Normalization/geneInfo.Sept2018.RData) to perform within and between lane normalization.
+- Data normalization for expression matrix is done by reading raw counts data into R. Normalization can be performed in many ways, DESeq2 has its own normalization build in, while [EDAseq](insert link) uses a ["gccontent" file](insert link) to perform within and between lane normalization.
 
 ### 08.0 Downstream analysis
-- Further data analysis is performed in [R](/../../r-toolbox/-/tree/master/Data%20Analysis)
+- Further data analysis is performed in [R](insert link)
 
 ### check FASTQ Contamination
 This is an additional step that can be done to check the contamination of fastq files with:
 
-A. Genome from other species using [FastQ screen](/Scripts/RNASeq/FASTQ%20Check%20Contamination/0.1%20-%20FASTQ%20Screen/fastq_screen_HPC.sh).
+A. Genome from other species using [FastQ screen](insert link).
 This step uses the trimmed fastq files and generates a text and html files for each sample in new folder called CONTAMINATION.  
 
-B. [viral genome](/Scripts/RNASeq/FASTQ%20Check%20Contamination/0.2%20-%20Virtect). This step uses the trimmed fastq files and requires the run of three scrips in order [virtect in FASTQ](/Scripts/RNASeq/FASTQ%20Check%20Contamination/0.2%20-%20Virtect/0.1%20-%20Virtect_on_FASTQ_files.sh), [virtect A](/Scripts/RNASeq/FASTQ%20Check%20Contamination/0.2%20-%20Virtect/0.2%20-%20Virtect.fix.A.sh), and [virtect B](/Scripts/RNASeq/FASTQ%20Check%20Contamination/0.2%20-%20Virtect/0.3%20-%20Virtect.fix.B.sh). The output of this step is a text file for each sample called "continoues_region" created in Virtect folder. Rename each continoues_region file to the corresponding sample name and download to a local folder. Downstream analysis is done using R.
+B. [viral genome](insert link). This step uses the trimmed fastq files and requires the run of three scrips in order [virtect in FASTQ](insert link), [virtect A](insert link), and [virtect B](insert link). The output of this step is a text file for each sample called "continoues_region" created in Virtect folder. Rename each continoues_region file to the corresponding sample name and download to a local folder. Downstream analysis is done using R.
 
 ## Output Folders structure
 Labname/Project (The project folder)
