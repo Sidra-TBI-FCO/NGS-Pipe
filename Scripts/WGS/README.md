@@ -22,7 +22,7 @@ This pipeline explaines the processing of whole genome sequecing raw data from m
 The output of each module will be generated in new folder with corresponding name inside QC folder. 
 
 ### 05.0 Variant Calling - SNP
-* Variants calling of SNP using [mutect](insert link). The input for this step is the normal and tumor bam files generated from step 2 and the output will be vcf files created in mutect folder. 
+* Variants calling of SNP using [mutect](/Scripts/WGS/05.0%20-%20Variant%20Calling%20-%20SNP). The input for this step is the normal and tumor bam files generated from step 2 and the output will be vcf files created in mutect folder. 
 
     #### 05.1 Filter PASSED
     * Filter vcf file to only selected variants that are marked with [PASS in the filter column](/Scripts/WES/05.1%20-%20Filter%20PASSED/filter_out_passed_vcf.sh) in the vcf file. The input file is vcf files generated from the previous step and the output will be a PASSED.vcf files generated in PASS folder. 
@@ -36,7 +36,7 @@ The output of each module will be generated in new folder with corresponding nam
     Download the output files (samples.maf and head.txt files) to a local directory, and merge the two files into one [final MuTect maf file using R script](/R%20Toolbox/Raw%20Data%20Processing/HPC%20Processing/MAF_File_Processing_Mutect.R)
 
 ### 06.0 Variant Calling - INDEL 
-* Variant calling of INDEL using [strelka2](insert link). This step is done in the main project folder and the input are bam files from BAM folder generated from step 2. The output will be a vcf files created in work/strelka2 directorie. 
+* Variant calling of INDEL using [strelka2](/Scripts/WGS/06.0%20-%20Variant%20Calling%20-%20INDEL). This step is done in the main project folder and the input are bam files from BAM folder generated from step 2. The output will be a vcf files created in work/strelka2 directory. 
     #### 06.1 Filter PASSED
     * Filter vcf file to only selected variants that are marked with [PASS in the filter column](/Scripts/WES/05.1%20-%20Filter%20PASSED/filter_out_passed_vcf.sh) in the vcf file. The input file is vcf files generated from the previous step and the output will be a PASSED.vcf files generated in PASS folder. 
     #### 06.2 Vcf to MAF
