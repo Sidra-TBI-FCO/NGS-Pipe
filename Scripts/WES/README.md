@@ -46,7 +46,7 @@ The output of each module will be generated in new folder with corresponding nam
     
     Download the output files (strelka2_all_samples.maf and header_strelka2_all_samples.maf files) to a local directory, and merge the two files into one [final strealka2 maf file using R script](insert link)
   
-* Further [processing of MuTect and Strealka2 MAF files](insert link) is done in R to filter out SNP and low complexity variants from strealka2 MAF file, combine MuTect and Strelka2 MAF files into one final MAF file, and to filter most deleterious variants from the final MAF file. 
+* Further [processing of MuTect and Strealka2 MAF files](/R%20Toolbox/Raw%20Data%20Processing/HPC%20Processing) is done in R to filter out SNP and low complexity variants from strealka2 MAF file, combine MuTect and Strelka2 MAF files into one final MAF file, and to filter most deleterious variants from the final MAF file. 
 
 # Output Folders Structure 
 Labname/Project
