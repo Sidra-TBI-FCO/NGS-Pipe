@@ -24,10 +24,10 @@ Here we provide the tools to process raw RNAseq paired end read from cancer samp
 - Generate a raw counts matrix using subreads [featureCounts](/Scripts/RNAseq/06.0%20-%20Expression%20Matrix/subreads.create.matrix.trimmed.HPC.sh). This step will uses all .bam files generated from step 4, and will be done in TRIMMED folder. The output file from this step is a gene expression matrix text file that will be created in TRIMMED/COUNT-p (p for paired) folder. Downstream analysis is done using R. 
 
 ### 07.0 Normalization 
-- Data normalization for expression matrix is done by reading raw counts data into R. Normalization can be performed in many ways, DESeq2 has its own normalization build in, while [EDAseq](insert link) uses a ["gccontent" file](insert link) to perform within and between lane normalization.
+- Data normalization for expression matrix is done by reading raw counts data into R. Normalization can be performed in many ways, DESeq2 has its own normalization build in, while [EDAseq](/R%20Toolbox/Raw%20Data%20Processing/Data%20Normalization/EDAseq_gene_counts_normalization.R) uses a ["gccontent" file](/R%20Toolbox/Raw%20Data%20Processing/Data%20Normalization/geneInfo.Sept2018.RData) to perform within and between lane normalization.
 
 ### 08.0 Downstream analysis
-- Further data analysis is performed in [R](insert link)
+- Further data analysis is performed in [R](/R%20Toolbox/Data%20Analysis)
 
 ### check FASTQ Contamination
 This is an additional step that can be done to check the contamination of fastq files with:
