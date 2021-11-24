@@ -32,10 +32,10 @@ Here we provide the tools to process raw RNAseq paired end read from cancer samp
 ### check FASTQ Contamination
 This is an additional step that can be done to check the contamination of fastq files with:
 
-A. Genome from other species using [FastQ screen](insert link).
+A. Genome from other species using [FastQ screen](/Scripts/RNAseq/Check%20FASTQ%20Contamination/01.0%20-%20FASTQ%20Screen/fastq_screen_HPC.sh).
 This step uses the trimmed fastq files and generates a text and html files for each sample in new folder called CONTAMINATION.  
 
-B. [viral genome](insert link). This step uses the trimmed fastq files and requires the run of three scrips in order [virtect in FASTQ](insert link), [virtect A](insert link), and [virtect B](insert link). The output of this step is a text file for each sample called "continoues_region" created in Virtect folder. Rename each continoues_region file to the corresponding sample name and download to a local folder. Downstream analysis is done using R.
+B. viral genome. This step uses the trimmed fastq files and requires the run of three scrips in order [virtect in FASTQ](/Scripts/RNAseq/Check%20FASTQ%20Contamination/02.0%20-%20Virtect/0.1%20-%20Virtect_on_FASTQ_files.sh), [virtect A](/Scripts/RNAseq/Check%20FASTQ%20Contamination/02.0%20-%20Virtect/0.2%20-%20Virtect.fix.A.sh), and [virtect B](/Scripts/RNAseq/Check%20FASTQ%20Contamination/02.0%20-%20Virtect/0.3%20-%20Virtect.fix.B.sh). The output of this step is a text file for each sample called "continoues_region" created in Virtect folder. Rename each continoues_region file to the corresponding sample name and download to a local folder. Downstream analysis is done using R.
 
 ## Output Folders structure
 Labname/Project (The project folder)
