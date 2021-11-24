@@ -6,7 +6,7 @@ Here we provide the tools to process raw RNAseq paired end read from cancer samp
 
 ## Pipeline Steps
 ### 01.0 Link/Concatenate FASTQ files
-- The first step in the pipeline is to create [renamed links or concatenated FASTQ files](/Scripts/RNAseq/01.0 - Linking_Concatenate FASTQ/find.fastq.files.sh) in a new folder called FASTQ. 
+- The first step in the pipeline is to create [renamed links or concatenated FASTQ files](/Scripts/RNAseq/01.0%20-%20Linking_Concatenate%20FASTQ/find.fastq.files.sh) in a new folder called FASTQ. 
 
 ### 02.0 Quality control (QC)
 - This step is done in the project folder. All fastq.gz files available in FASTQ folder will be QC'ed [FastqQ files quality](/Scripts/RNASeq/0.1-%20QC), then MultiQC will be run to agregate the results into one HTML report. All individual fastQC output files will be created in a new folder called QC, while the multiQC report will go in the project folder. 
