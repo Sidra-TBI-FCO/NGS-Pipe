@@ -33,7 +33,7 @@ The output of each module will be generated in new folder with corresponding nam
     #### 05.4 Merging MAF files 
     * This step is done to [merge](/Scripts/WES/05.4%20-%20Merge%20MAF%20Files/README.md) MAF files from each sample into one MAF file and to create a seperate text file with the column names of MAF file. 
     
-    Download the output files (samples.maf and head.txt files) to a local directory, and merge the two files into one [final MuTect maf file using R script](insert link)
+    Download the output files (samples.maf and head.txt files) to a local directory, and merge the two files into one [final MuTect maf file using R script](/R%20Toolbox/Raw%20Data%20Processing/HPC%20Processing/MAF_File_Processing_Mutect.R)
 
 ### 06.0 Variant Calling - INDEL 
 * Variant calling of INDEL using [strelka2](/Scripts/WES/06.0%20-%20Variants%20Calling%20-%20INDEL/strelka2_bcbionextgen_1.1.5_testing.sh). This step is done in the main project folder and the input are bam files from BAM folder generated from step 2. The output will be a vcf files created in work/strelka2 directorie. 
@@ -44,9 +44,9 @@ The output of each module will be generated in new folder with corresponding nam
     #### 06.3 Merging MAF files
     * This step is done to [merge](/Scripts/WES/05.4%20-%20Merge%20MAF%20Files/README.md) MAF files from each sample into one MAF file and to create a seperate text file with the column names of MAF file. 
     
-    Download the output files (strelka2_all_samples.maf and header_strelka2_all_samples.maf files) to a local directory, and merge the two files into one [final strealka2 maf file using R script](insert link)
+    Download the output files (strelka2_all_samples.maf and header_strelka2_all_samples.maf files) to a local directory, and merge the two files into one [final strealka2 maf file using R script](/R%20Toolbox/Raw%20Data%20Processing/HPC%20Processing/MAF_File_Processing_Strelka2.R)
   
-* Further [processing of MuTect and Strealka2 MAF files](/R%20Toolbox/Raw%20Data%20Processing/HPC%20Processing) is done in R to filter out SNP and low complexity variants from strealka2 MAF file, combine MuTect and Strelka2 MAF files into one final MAF file, and to filter most deleterious variants from the final MAF file. 
+* Further [processing of MuTect and Strealka2 MAF files](/R%20Toolbox/Raw%20Data%20Processing/HPC%20Processing/Combine_strelka2_mutect_and_final_variant_filter.R) is done in R to filter out SNP and low complexity variants from strealka2 MAF file, combine MuTect and Strelka2 MAF files into one final MAF file, and to filter most deleterious variants from the final MAF file. 
 
 # Output Folders Structure 
 Labname/Project
