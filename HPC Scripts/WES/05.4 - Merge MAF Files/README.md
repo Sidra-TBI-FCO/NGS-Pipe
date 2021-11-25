@@ -1,5 +1,5 @@
 ### Merging MAF Files 
-This step is done to merge all MAF files from each sample into one MAF, and to create a seperate text file with the column names of MAF file by running the following commands in MAF folder
+This step is done to merge all MAF files from each sample into one MAF, and to create a seperate text file with the column names of MAF file by running the following commands in the terminal in MAF folder
 
 * Variants Calling - SNP 
    * cat *.maf | egrep -v "^#|^Hugo_Symbol" >> samples.maf
