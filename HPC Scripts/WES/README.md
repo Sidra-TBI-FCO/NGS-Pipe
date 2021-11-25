@@ -36,7 +36,7 @@ The output of each module will be generated in new folder with corresponding nam
     Download the output files (samples.maf and head.txt files) to a local directory, and merge the two files into one [final MuTect maf file using R script](/R%20Toolbox/Raw%20Data%20Processing/HPC%20Processing/MAF_File_Processing_Mutect.R)
 
 ### 06.0 Variant Calling - INDEL 
-* Variant calling of INDEL using [strelka2](/Scripts/WES/06.0%20-%20Variants%20Calling%20-%20INDEL/strelka2_bcbionextgen_1.1.5_testing.sh). This step is done in the main project folder and the input are bam files from BAM folder generated from step 2. The output will be a vcf files created in work/strelka2 directorie. 
+* Variant calling of INDEL using [strelka2](/Scripts/WES/06.0%20-%20Variants%20Calling%20-%20INDEL/strelka2_bcbionextgen_1.1.5_testing.sh). This step is done in the main project folder and the input are bam files from BAM folder generated from step 2. The output will be a vcf files created in work/strelka2 directory. 
     #### 06.1 Filter PASSED
     * Filter vcf file to only selected variants that are marked with [PASS in the filter column](/Scripts/WES/05.1%20-%20Filter%20PASSED/filter_out_passed_vcf.sh) in the vcf file. The input file is vcf files generated from the previous step and the output will be a PASSED.vcf files generated in PASS folder. 
     #### 06.2 Vcf to MAF
