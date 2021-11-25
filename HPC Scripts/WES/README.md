@@ -6,43 +6,43 @@ This pipeline explaines the processing of whole exome sequecing raw data from ma
 
 ## The Pipeline steps 
 ### 01.0 Link/Concatenate FASTQ files
-* The first step in the pipeline is to create renamed [links or concatenated FASTQ](/Scripts/RNAseq/01.0%20-%20Linking_Concatenate%20FASTQ/find.fastq.files.sh) files 
+* The first step in the pipeline is to create renamed [links or concatenated FASTQ](/HPC%20Scripts/RNAseq/01.0%20-%20Linking_Concatenate%20FASTQ/find.fastq.files.sh) files 
 
 ### 02.0 Quality control
-* This step is done to check the raw data quality before start processing using [fastq](/Scripts/RNAseq/02.0%20-%20Quality%20Control%20(QC)/fastqc.HPC.sh). The input in for this step is all fastq files available in FASTQ folder. 
+* This step is done to check the raw data quality before start processing using [fastq](/HPC%20Scripts/RNAseq/02.0%20-%20Quality%20Control%20(QC)/fastqc.HPC.sh). The input in for this step is all fastq files available in FASTQ folder. 
 
 ### 03.0 Alignment 
-* This step is to align the read to the refrence genome hs37d5 using [BWA aligner](/Scripts/WES/03.0%20-%20Alignment/Align_BWA_v0.7.15.sh) and to trimm the adaptor sequences as well. This step is done in the main project folder and uses all fastq files available in FASTQ folder. The output is .bam files of aligned read and will created in BAMS folder. 
+* This step is to align the read to the refrence genome hs37d5 using [BWA aligner](/HPC%20Scripts/WES/03.0%20-%20Alignment/Align_BWA_v0.7.15.sh) and to trimm the adaptor sequences as well. This step is done in the main project folder and uses all fastq files available in FASTQ folder. The output is .bam files of aligned read and will created in BAMS folder. 
 
 ### 04.0 QC Post Alignment
 * Post alignment quality control is done in BAMS folder and use the alligned reads generated from the previous step. There are three modules used to check post alignment quality:
-    * A. [Conpair](/Scripts/WES/04.0%20-%20QC%20Post%20Alignment/01.0%20-%20ConPair): To check normal-tumor samples concordance 
-    * B. [Targeted Panel](/Scripts/WES/04.0%20-%20QC%20Post%20Alignment/02.0%20-%20Targeted%20Panel): To check the coverage of the targeted regions (exonic regions). 
-    * C. [Mosdepth](/Scripts/WES/04.0%20-%20QC%20Post%20Alignment/03.0%20-%20Mosdepth/mosdepth_v0.2.8.sh): To get the coverage and plot proportion of bases at coverage.  
+    * A. [Conpair](/HPC%20Scripts/WES/04.0%20-%20QC%20Post%20Alignment/01.0%20-%20ConPair): To check normal-tumor samples concordance 
+    * B. [Targeted Panel](/HPC%20Scripts/WES/04.0%20-%20QC%20Post%20Alignment/02.0%20-%20Targeted%20Panel): To check the coverage of the targeted regions (exonic regions). 
+    * C. [Mosdepth](/HPC%20Scripts/WES/04.0%20-%20QC%20Post%20Alignment/03.0%20-%20Mosdepth/mosdepth_v0.2.8.sh): To get the coverage and plot proportion of bases at coverage.  
 The output of each module will be generated in new folder with corresponding name inside QC folder. 
 
 ### 05.0 Variant Calling - SNP
-* Variants calling of SNP using [mutect](/Scripts/WES/05.0%20-%20Variants%20Calling%20-%20SNP). The input for this step is the normal and tumor bam files generated from step 2 and the output will be vcf files created in mutect folder. 
+* Variants calling of SNP using [mutect](/HPC%20Scripts/WES/05.0%20-%20Variants%20Calling%20-%20SNP). The input for this step is the normal and tumor bam files generated from step 2 and the output will be vcf files created in mutect folder. 
 
     #### 05.1 Filter PASSED
-    * Filter vcf file to only selected variants that are marked with [PASS in the filter column](/Scripts/WES/05.1%20-%20Filter%20PASSED/filter_out_passed_vcf.sh) in the vcf file. The input file is vcf files generated from the previous step and the output will be a PASSED.vcf files generated in PASS folder. 
+    * Filter vcf file to only selected variants that are marked with [PASS in the filter column](/HPC%20Scripts/WES/05.1%20-%20Filter%20PASSED/filter_out_passed_vcf.sh) in the vcf file. The input file is vcf files generated from the previous step and the output will be a PASSED.vcf files generated in PASS folder. 
     #### 05.2 FP Filter
-    * [False positive filter](/Scripts/WES/05.2%20-%20FP%20Filter/fpFilterPipeline_WH.sh) applied to PASSED.vcf files generated from the previous step to filter out false positive variants. The output files will be PASSED_filter.vcf created in a new folder called Filter/filterVcf. 
+    * [False positive filter](/HPC%20Scripts/WES/05.2%20-%20FP%20Filter/fpFilterPipeline_WH.sh) applied to PASSED.vcf files generated from the previous step to filter out false positive variants. The output files will be PASSED_filter.vcf created in a new folder called Filter/filterVcf. 
     #### 05.3 Vcf to MAF
-    * Converting [Vcf to MAF](/Scripts/WES/05.3%20-%20VCF%20to%20MAF/runMAFtools_PASSED_filtered_WH.sh) files using tools like VEP that determines the effect of variants on genes, transcripts, and protein sequence (using SIFT), as well as regulatory regions. The input for this step is all PASSED_filter.vcf files created from the previous step and the output will be MAF files created in MAF folder. 
+    * Converting [Vcf to MAF](/HPC%20Scripts/WES/05.3%20-%20VCF%20to%20MAF/runMAFtools_PASSED_filtered_WH.sh) files using tools like VEP that determines the effect of variants on genes, transcripts, and protein sequence (using SIFT), as well as regulatory regions. The input for this step is all PASSED_filter.vcf files created from the previous step and the output will be MAF files created in MAF folder. 
     #### 05.4 Merging MAF files 
-    * This step is done to [merge](/Scripts/WES/05.4%20-%20Merge%20MAF%20Files/README.md) MAF files from each sample into one MAF file and to create a seperate text file with the column names of MAF file. 
+    * This step is done to [merge](/HPC%20Scripts/WES/05.4%20-%20Merge%20MAF%20Files/README.md) MAF files from each sample into one MAF file and to create a seperate text file with the column names of MAF file. 
     
     Download the output files (samples.maf and head.txt files) to a local directory, and merge the two files into one [final MuTect maf file using R script](/R%20Toolbox/Raw%20Data%20Processing/HPC%20Processing/MAF_File_Processing_Mutect.R)
 
 ### 06.0 Variant Calling - INDEL 
-* Variant calling of INDEL using [strelka2](/Scripts/WES/06.0%20-%20Variants%20Calling%20-%20INDEL/strelka2_bcbionextgen_1.1.5_testing.sh). This step is done in the main project folder and the input are bam files from BAM folder generated from step 2. The output will be a vcf files created in work/strelka2 directory. 
+* Variant calling of INDEL using [strelka2](/HPC%20Scripts/WES/06.0%20-%20Variants%20Calling%20-%20INDEL/strelka2_bcbionextgen_1.1.5_testing.sh). This step is done in the main project folder and the input are bam files from BAM folder generated from step 2. The output will be a vcf files created in work/strelka2 directory. 
     #### 06.1 Filter PASSED
-    * Filter vcf file to only selected variants that are marked with [PASS in the filter column](/Scripts/WES/05.1%20-%20Filter%20PASSED/filter_out_passed_vcf.sh) in the vcf file. The input file is vcf files generated from the previous step and the output will be a PASSED.vcf files generated in PASS folder. 
+    * Filter vcf file to only selected variants that are marked with [PASS in the filter column](/HPC%20Scripts/WES/05.1%20-%20Filter%20PASSED/filter_out_passed_vcf.sh) in the vcf file. The input file is vcf files generated from the previous step and the output will be a PASSED.vcf files generated in PASS folder. 
     #### 06.2 Vcf to MAF
-    * Converting [Vcf2MAF](/Scripts/WES/05.3%20-%20VCF%20to%20MAF/runMAFtools_PASSED_filtered_WH.sh) files using tools like VEP that determines the effect of variants on genes, transcripts, and protein sequence (using SIFT), as well as regulatory regions. The input for this step is all PASSED.vcf files created from the previous step and the output will be MAF files created in MAF folder. 
+    * Converting [Vcf2MAF](/HPC%20Scripts/WES/05.3%20-%20VCF%20to%20MAF/runMAFtools_PASSED_filtered_WH.sh) files using tools like VEP that determines the effect of variants on genes, transcripts, and protein sequence (using SIFT), as well as regulatory regions. The input for this step is all PASSED.vcf files created from the previous step and the output will be MAF files created in MAF folder. 
     #### 06.3 Merging MAF files
-    * This step is done to [merge](/Scripts/WES/05.4%20-%20Merge%20MAF%20Files/README.md) MAF files from each sample into one MAF file and to create a seperate text file with the column names of MAF file. 
+    * This step is done to [merge](/HPC%20Scripts/WES/05.4%20-%20Merge%20MAF%20Files/README.md) MAF files from each sample into one MAF file and to create a seperate text file with the column names of MAF file. 
     
     Download the output files (strelka2_all_samples.maf and header_strelka2_all_samples.maf files) to a local directory, and merge the two files into one [final strealka2 maf file using R script](/R%20Toolbox/Raw%20Data%20Processing/HPC%20Processing/MAF_File_Processing_Strelka2.R)
   
