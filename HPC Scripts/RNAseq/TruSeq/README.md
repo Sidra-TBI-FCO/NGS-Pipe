@@ -6,16 +6,16 @@ Here we provide the tools to process raw RNAseq paired end read from cancer samp
 
 ## Pipeline Steps
 ### 01.0 Link/Concatenate FASTQ files
-- The first step in the pipeline is to create renamed [links or concatenated FASTQ files](/HPC%20Scripts/RNAseq/TruSeq/01.0%20-%20Linking_Concatenate%20FASTQ) in a new folder called FASTQ. 
+- The first step in the pipeline is to create renamed [links or concatenated FASTQ files](/HPC%20Scripts/RNAseq/TruSeq/01.0%20-%20Linking_Concatenate%20FASTQ/find.fastq.files.sh) in a new folder called FASTQ. 
 
 ### 02.0 Quality control (QC)
-- This step is done in the project folder. All fastq.gz files available in FASTQ folder will be QC'ed [FastqQ files quality](/HPC%20Scripts/RNAseq/TruSeq/02.0%20-%20Quality%20Control%20(QC)), then MultiQC will be run to agregate the results into one HTML report. All individual fastQC output files will be created in a new folder called QC, while the multiQC report will go in the project folder. 
+- This step is done in the project folder. All fastq.gz files available in FASTQ folder will be QC'ed [FastqQ files quality](/HPC%20Scripts/RNAseq/TruSeq/02.0%20-%20Quality%20Control%20(QC)/fastqc.HPC.sh), then MultiQC will be run to agregate the results into one HTML report. All individual fastQC output files will be created in a new folder called QC, while the multiQC report will go in the project folder. 
 
 ### 03.0 Trimming
-- [Trimming](/HPC%20Scripts/RNAseq/TruSeq/03.0%20-%20Trimming) of adapter sequences from short read data in the fastq files avilable in FASTQ folder. This step is done in the main project folder, and the output (trimmed fastq files) will be created in a new folder called TRIMMED/FASTQ. Quality control of the trimmed fastq files can be done following the previous step inside the TRIMMED folder.
+- [Trimming](/HPC%20Scripts/RNAseq/TruSeq/03.0%20-%20Trimming/trimming.fastq.HPC.sh) of adapter sequences from short read data in the fastq files avilable in FASTQ folder. This step is done in the main project folder, and the output (trimmed fastq files) will be created in a new folder called TRIMMED/FASTQ. Quality control of the trimmed fastq files can be done following the previous step inside the TRIMMED folder.
 
 ### 04.0 Alignment
-- Allign reads to the reference genome GRCH37 or GRCH38 using STAR or Hista2. Currently we are using reference genome GRCH38 and [Hisat2 aligner](/HPC%20Scripts/RNAseq/TruSeq/04.0%20-%20Alignment). This step is done in TRIMMED folder and uses the trimmed fastq files generated from the previous step. The output files from this step will be .bam files and created in TRIMMED/BAM folder. 
+- Allign reads to the reference genome GRCH37 or GRCH38 using STAR or Hista2. Currently we are using reference genome GRCH38 and [Hisat2 aligner](/HPC%20Scripts/RNAseq/TruSeq/04.0%20-%20Alignment/align.fastq.hisat2.sh). This step is done in TRIMMED folder and uses the trimmed fastq files generated from the previous step. The output files from this step will be .bam files and created in TRIMMED/BAM folder. 
 
 ### 05.0 QC Post Alignment 
 - [Post alignment quality control](/HPC%20Scripts/RNAseq/TruSeq/05.0%20-%20QC%20Post-Alignment/README.md) of bam files created from the previous step is aggregated by running MultiQc in the TRIMMED folder. The output from this step will be an HTML multiqc report generated in the TRIMMED folder. 
