@@ -1,5 +1,5 @@
 ## RNA-Seq Lexogen
-The pipeline for RNAseq using lexogen is different from the standard RNAseq using [illumina TruSeq](/HPC%20Scripts/RNAseq/TruSeq). Raw data is processed by Sidra bioinformatics core following the pipeline described in [Lexogen QuantSeq user guide](https://www.lexogen.com/wp-content/uploads/2021/05/015UG108V0311_QuantSeq-Data-Analysis-Pipeline_2021-05-04.pdf). 
+The pipeline for processing RNAseq data using lexogen is different from the standard RNAseq using [illumina TruSeq](/HPC%20Scripts/RNAseq/TruSeq). Raw data is processed by Sidra bioinformatics core following the pipeline described in [Lexogen QuantSeq user guide](https://www.lexogen.com/wp-content/uploads/2021/05/015UG108V0311_QuantSeq-Data-Analysis-Pipeline_2021-05-04.pdf). 
 
 ### Data Normalization
 After processing the raw data. Normalization is done in R using [EDAseq package](/R%20Toolbox/Raw%20Data%20Processing/Data%20Normalization/EDAseq_genes_counts_normalization_Lexogen.R). 
